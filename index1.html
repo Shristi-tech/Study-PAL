@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudyPal & StudyPlanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lucida Sans', sans-serif;
+      overflow: hidden;
+    }
+
+    /* First page (StudyPal welcome screen) */
+    .welcome-screen {
+      background-color: #ed77a6;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    .container {
+      position: relative;
+    }
+
+    .container h1 {
+      font-size: 5rem;
+      color: #e5e8f0;
+      transform: rotate(-10deg) scale(0.5);
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      z-index: 1;
+      animation: zoomIn 2s ease forwards;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: rotate(-10deg) scale(0.5);
+        opacity: 0;
+      }
+      to {
+        transform: rotate(-10deg) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .star {
+      position: absolute;
+      color: rgb(47, 26, 5);
+      font-size: 20px;
+      opacity: 0;
+      animation: sparkle 2s infinite ease-in-out;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.5) rotate(45deg); }
+    }
+
+    .star1 { top: -30px; left: -40px; animation-delay: 0s; }
+    .star2 { top: -40px; right: -30px; animation-delay: 0.4s; }
+    .star3 { bottom: -30px; left: -35px; animation-delay: 0.8s; }
+    .star4 { bottom: -40px; right: 10px; animation-delay: 1.2s; }
+    .star5 { top: 0px; left: 120px; animation-delay: 1.6s; }
+
+    /* Second page (StudyPlanner) */
+    .planner-section {
+      display: none;
+      background-color: white;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- First Page: Welcome screen -->
+  <div class="welcome-screen" id="welcomeScreen">
+    <div class="container">
+      <h1>StudyPal</h1>
+      <div class="star star1">★</div>
+      <div class="star star2">★</div>
+      <div class="star star3">★</div>
+      <div class="star star4">★</div>
+      <div class="star star5">★</div>
+    </div>
+  </div>
+
+  <!-- Second Page: Planner -->
+  <div class="planner-section" id="plannerSection">
+    <header>
+      <h1>📚 StudyPlanner</h1>
+      <p>Your personal task manager for productive learning</p>
+    </header>
+
+    <main>
+      <section class="task-input">
+        <input type="text" id="taskInput" placeholder="Enter your study task..." />
+        <input type="date" id="taskDate" />
+        <select id="taskCategory">
+          <option value="General">General</option>
+          <option value="Math">Math</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+          <option value="Programming">Programming</option>
+        </select>
+        <button onclick="addTask()">Add Task</button>
+      </section>
+
+      <section class="filter-section">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter" onchange="filterTasks()">
+          <option value="All">All</option>
+          <option value="General">General</option>
+          <option value="Math">Math</option>
+          <option value="Science">Science</option>
+          <option value="History">History</option>
+          <option value="Programming">Programming</option>
+        </select>
+      </section>
+
+      <section class="task-list">
+        <ul id="taskList"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made with ❤ for students</p>
+      <a href="index.html">go to index page</a><br>
+      <a href="todolist.html">go to todo list</a><br>
+      <a href="remainder.html">go to remainder</a>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script2.js"></script>
+  <script src="script.js"></script>
+
+  <!-- Transition from welcome screen to planner -->
+  <script>
+    setTimeout(() => {
+      document.getElementById('welcomeScreen').style.display = 'none';
+      document.getElementById('plannerSection').style.display = 'block';
+      document.body.style.overflow = 'auto';
+    }, 3000); // 3 seconds delay
+  </script>
+
+</body>
+</html>
